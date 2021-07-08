@@ -43,8 +43,7 @@ const Login = ({ setUser }) => {
         setUser(token);
         history.push("/");
       } catch (error) {
-        console.log(error.response);
-        console.log(error.message);
+        console.log(error.response.data.message);
       }
     }
   };
@@ -52,11 +51,12 @@ const Login = ({ setUser }) => {
   // JSX
   return (
     <div className="container">
-      <div className="row">
+      <form
+        className="form-control mx-auto"
+        style={{ width: 400 }}
+        onSubmit={handleSubmit}
+      >
         <h2 className="text-center">Se connecter</h2>
-      </div>
-
-      <form className="mx-auto" style={{ width: 400 }} onSubmit={handleSubmit}>
         <input
           className="form-control mb-2"
           type="email"
@@ -94,15 +94,13 @@ const Login = ({ setUser }) => {
           </div>
         </div>
 
-        <span>{errorMessage}</span>
-
-        <div className="row">
+        <span className="text-danger">{errorMessage}</span>
+        <div className="text-center">
           <button className="btn btn-primary" type="submit">
             Se connecter
           </button>
         </div>
-
-        <div className="row text-center">
+        <div className="text-center">
           <Link to="./signup">
             <span>Pas encore de compte ? Inscris-toi !</span>
           </Link>

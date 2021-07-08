@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import Offer from "./pages/Offer";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Publish from "./pages/Publish";
 
 function App() {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login setUser={setUser} />
+          </Route>
+          <Route path="/publish">
+            <Publish userToken={userToken} />
           </Route>
           <Route path="/">
             <Home />

@@ -8,7 +8,6 @@ const Signup = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [checkbox, setCheckbox] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   // Extras
   const [visiblePass, setVisiblePass] = useState(false);
@@ -61,7 +60,7 @@ const Signup = ({ setUser }) => {
           setUser(token);
           history.push("/");
         } catch (error) {
-          setErrorMessage("Une erreur est survenue.");
+          console.log(error.response.data.message);
         }
       }
     }
@@ -70,11 +69,12 @@ const Signup = ({ setUser }) => {
   // JSX
   return (
     <div className="container">
-      <div className="row">
+      <form
+        className="form-control mx-auto"
+        style={{ width: 400 }}
+        onSubmit={handleSubmit}
+      >
         <h2 className="text-center">S'inscrire</h2>
-      </div>
-
-      <form className="mx-auto" style={{ width: 400 }} onSubmit={handleSubmit}>
         <input
           className="form-control mb-2"
           type="text"
@@ -151,12 +151,7 @@ const Signup = ({ setUser }) => {
 
         <div className="border border-info mb-2 p-2">
           <div className="d-flex justify-content-center align-items-center">
-            <input
-              type="checkbox"
-              checked={checkbox}
-              onChange={() => setCheckbox(!checkbox)}
-              className="me-2"
-            />
+            <input type="checkbox" className="me-2" />
             <span>S'inscrire à notre newsletter</span>
           </div>
 
@@ -167,15 +162,14 @@ const Signup = ({ setUser }) => {
           </p>
         </div>
 
-        <span>{errorMessage}</span>
+        <span className="text-danger">{errorMessage}</span>
 
-        <div className="row">
+        <div className="text-center">
           <button className="btn btn-primary" type="submit">
             S'inscrire
           </button>
         </div>
-
-        <div className="row text-center">
+        <div className="text-center">
           <Link to="./login">
             <span>Tu as déjà un compte ? Connecte-toi !</span>
           </Link>
