@@ -23,7 +23,7 @@ I have done it all over again to include and learn [BootStrap](https://getbootst
 ## Get the Code
 
 ```
-$ git clone https://github.com/frmi2018/frmi-vinted.git
+$ git clone https://github.com/frmi2018/vinted-frmi.git
 ```
 
 ## Backend
