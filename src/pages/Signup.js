@@ -68,7 +68,7 @@ const Signup = ({ setUser }) => {
 
   // JSX
   return (
-    <div className="container">
+    <div className="container p-2 bg-light">
       <form
         className="form-control mx-auto"
         style={{ width: 400 }}

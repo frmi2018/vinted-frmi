@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const Header = ({ userToken, setUser }) => {
   return (
-    <header className="container">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <header className="container p-2 bg-light border-bottom">
+      <nav className="navbar navbar-expand-lg navbar-light">
         {/* header left */}
 
         <Link to="/" className="navbar-brand nav-link">

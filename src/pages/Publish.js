@@ -55,83 +55,96 @@ const Publish = ({ userToken }) => {
 
   // Check if user is connect
   return userToken ? (
-    <div className="container p-2">
+    <div className="container p-2 bg-light">
       <form className="form-control" onSubmit={handleSubmit}>
-        <label htmlFor="file" className="input-design-default">
-          <i class="bi bi-image me-2"></i>
-          <span>Ajoute une photo</span>
-        </label>
-        <input
-          id="file"
-          type="file"
-          className="hide-input-file"
-          onChange={(event) => {
-            setFile(event.target.files[0]);
-          }}
-        />
+        <h2>Vends ton article</h2>
 
-        <div className="form-control mb-2  bg-light">
+        <div className="form-control mb-2">
+          <span>Ajoute jusqu'à 20 photos.</span>
+
+          <label htmlFor="file" className="input-design-default">
+            <i class="bi bi-image me-2"></i>
+            <span>Ajoute une photo</span>
+          </label>
+
+          <input
+            id="file"
+            type="file"
+            className="hide-input-file"
+            onChange={(event) => {
+              setFile(event.target.files[0]);
+            }}
+          />
+        </div>
+
+        <div className="form-control mb-2">
+          <span>Titre</span>
           <input
             type="text"
-            placeholder="titre"
+            placeholder="Ex: Chemise Sézane verte"
             className="form-control mb-2"
             value={title}
             onChange={(event) => {
               setTitle(event.target.value);
             }}
           />
+          <span>Décris ton article</span>
           <textarea
-            placeholder="description"
+            placeholder="Ex: porté quelques fois, taille correctement."
             className="form-control"
             value={description}
             onChange={(event) => {
               setDescription(event.target.value);
             }}
-            cols="30"
-            rows="10"
+            rows="5"
           />
         </div>
 
-        <div className="form-control mb-2  bg-light">
+        <div className="form-control mb-2">
+          <span>Marque</span>
           <input
             type="text"
-            placeholder="brand"
+            placeholder="Ex: Sézane"
             className="form-control mb-2"
             value={brand}
             onChange={(event) => {
               setBrand(event.target.value);
             }}
           />
+          <span>Taille</span>
           <input
             type="text"
-            placeholder="size"
+            placeholder="Ex: M"
             className="form-control mb-2"
             value={size}
             onChange={(event) => {
               setSize(event.target.value);
             }}
           />
+          <span>Couleur</span>
           <input
             type="text"
-            placeholder="color"
+            placeholder="Ex: verte"
             className="form-control mb-2"
             value={color}
             onChange={(event) => {
               setColor(event.target.value);
             }}
           />
+          <span>Condition</span>
           <input
             type="text"
-            placeholder="condition"
+            placeholder="Ex: Bon état"
             className="form-control mb-2"
             value={condition}
             onChange={(event) => {
               setCondition(event.target.value);
             }}
           />
+          <span>Ville</span>
           <input
             type="text"
-            placeholder="city"
+            placeholder="Ex: Paris"
             className="form-control"
             value={city}
             onChange={(event) => {
@@ -141,7 +154,8 @@ const Publish = ({ userToken }) => {
         </div>
 
         <div className="form-control bg-light d-flex align-items-center mb-2">
-          <div className="input-group me-2" style={{ width: 160 }}>
+          <span>Prix</span>
+          <div className="input-group mx-2" style={{ width: 160 }}>
             <input
               className="form-control"
               type="number"
