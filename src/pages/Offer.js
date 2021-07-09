@@ -11,7 +11,8 @@ const Offer = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+          // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+          `http://localhost:4000/offer/${id}`
         );
         // console.log(response.data);
         setData(response.data);
@@ -21,7 +22,7 @@ const Offer = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   function getRandomColor() {
     var letters = "0123456789ABCDEF";
@@ -38,48 +39,91 @@ const Offer = () => {
       <span>Chargement des infos de l'annonce en cours...</span>
     </div>
   ) : (
-    <div className="card">
-      <div className="row">
-        <div className="col">
-          <img src={data.product_image.secure_url} alt={data.product_name} />
-        </div>
-        <div className="col">
-          <div className="card-body">
-            <h2 className="card-title">{data.product_price} €</h2>
-            <table className="table-borderless">
-              <tbody>
-                {data.product_details.map((item, index) => {
-                  const keys = Object.keys(item);
-                  return (
-                    keys[0] !== "MODES DE PAIEMENT" && (
-                      <tr
-                        key={index}
-                        className="d-flex justify-content-between"
-                      >
-                        <td>{keys[0]}</td>
-                        <td>{item[keys[0]]}</td>
-                      </tr>
-                    )
-                  );
-                })}
-              </tbody>
-            </table>
-            <hr />
-            <h2>{data.product_name}</h2>
-            <p>{data.product_description}</p>
-            <div className="d-flex align-items-center">
-              <div
-                className="avatar m-2"
-                style={{ backgroundColor: getRandomColor() }}
-              >
-                {data.owner.account.username.charAt(0).toUpperCase()}
+    <div className="container p-2 bg-light">
+      <div className="card">
+        <div className="card-body">
+          <div className="row">
+            <div
+              className="col ecommerce-gallery"
+              data-mdb-zoom-effect="true"
+              data-mdb-auto-height="true"
+            >
+              <div className="row shadow-5">
+                <div className="col-12">
+                  <div className="lightbox text-center">
+                    <img
+                      src={data.product_image.secure_url}
+                      alt={data.product_name}
+                      className="ecommerce-gallery-main-img active w-50"
+                    />
+                  </div>
+                </div>
+                <div className="col-3 mt-1">
+                  <img
+                    src={data.product_image.secure_url}
+                    alt="Gallery image 1"
+                    className="active w-100"
+                  />
+                </div>
+                <div className="col-3 mt-1">
+                  <img
+                    src={data.product_image.secure_url}
+                    alt="Gallery image 2"
+                    className="w-100"
+                  />
+                </div>
+                <div className="col-3 mt-1">
+                  <img
+                    src={data.product_image.secure_url}
+                    alt="Gallery image 3"
+                    className="w-100"
+                  />
+                </div>
+                <div className="col-3 mt-1">
+                  <img
+                    src={data.product_image.secure_url}
+                    alt="Gallery image 4"
+                    className="w-100"
+                  />
+                </div>
               </div>
-              <span>{data.owner.account.username}</span>
             </div>
+            <div className="col">
+              <h1 className="card-title">{data.product_name}</h1>
+              <h2>{data.product_price} €</h2>
+              <p>{data.product_description}</p>
 
-            <button className="btn btn-primary" type="button">
-              Acheter
-            </button>
+              <div className="d-flex flex-column border-top">
+                <table className="table-borderless w-100 my-2">
+                  <tbody>
+                    {data.product_details.map((item, index) => {
+                      const keys = Object.keys(item);
+                      return (
+                        keys[0] !== "MODES DE PAIEMENT" && (
+                          <tr key={index}>
+                            <td>{keys[0]}</td>
+                            <td>{item[keys[0]]}</td>
+                          </tr>
+                        )
+                      );
+                    })}
+                  </tbody>
+                </table>
+
+                <div className="d-flex align-items-center">
+                  <div
+                    className="avatar m-2"
+                    style={{ backgroundColor: getRandomColor() }}
+                  >
+                    {data.owner.account.username.charAt(0).toUpperCase()}
+                  </div>
+                  <span>{data.owner.account.username}</span>
+                </div>
+                <button className="btn btn-primary mt-2" type="button">
+                  Acheter
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

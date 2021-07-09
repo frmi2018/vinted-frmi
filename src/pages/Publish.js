@@ -45,6 +45,7 @@ const Publish = ({ userToken }) => {
           { headers: { Authorization: `Bearer ${userToken}` } }
         );
         console.log(response.data);
+        <Redirect to={{ pathname: "/" }} />;
       } catch (error) {
         console.log(error.response.data.message);
       }
