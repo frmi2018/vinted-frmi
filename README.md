@@ -2,7 +2,8 @@
 
 📅 started july 2021  
 Developed with Visual Studio Code on Windows 10  
-in progress...
+
+🔨 in progress...
 
 ## Why that ?
 
@@ -20,9 +21,11 @@ I have done it all over again to include and learn [BootStrap](https://getbootst
 - [Stripe](https://stripe.com/fr) for payment
 - [Cloudinary](https://cloudinary.com/) for storage
 
-![alt text](https://github.com/frmi2018/vinted1-frmi/blob/main/vinted.png?raw=true)
+## Screens
 
-![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted.png?raw=true)
+![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted1.png)
+
+![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted.png)
 
 ## Get the Code
 
