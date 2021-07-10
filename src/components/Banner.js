@@ -39,7 +39,7 @@ const Banner = () => {
           color: "white",
           position: "absolute",
           bottom: -1,
-          left: 50,
+          left: "25%",
         }}
       />
     </div>

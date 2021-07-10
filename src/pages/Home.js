@@ -47,17 +47,21 @@ const Home = () => {
             </span>
           </div>
 
-          <div className={showAll ? "row" : "d-flex overflow-hidden"}>
+          <div
+            className={showAll ? "row row-cols-5" : "d-flex overflow-hidden"}
+          >
             {data.offers.map((offer) => {
               return (
-                <div className="col m-1">
-                  <Link to={`/offer/${offer._id}`} key={offer._id}>
-                    <div className="card h-100" style={{ width: 220 }}>
+                <Link to={`/offer/${offer._id}`} key={offer._id}>
+                  <div className="card h-100">
+                    <div>
                       <img
                         src={offer.product_image.secure_url}
-                        className="card-img-top"
+                        className="card-img-top w-100"
                         alt={offer.product_name}
                       />
+                    </div>
+                    <div>
                       <ul className="list-group border-top">
                         <li className="list-group-item d-flex justify-content-between align-items-center border-0">
                           <div className="d-flex justify-content-between align-items-center">
@@ -68,20 +72,20 @@ const Home = () => {
                         {/* Show only ... */}
                         {offer.product_details.map((item, index) => {
                           const keys = Object.keys(item);
-                          return keys[0] === "TAILLE" ? (
-                            <li className="list-group-item border-0">
-                              {item[keys[0]]}
-                            </li>
-                          ) : keys[0] === "MARQUE" ? (
-                            <li className="list-group-item border-0">
+                          return keys[0] === "TAILLE" ||
+                            keys[0] === "MARQUE" ? (
+                            <li
+                              key={index}
+                              className="list-group-item border-0"
+                            >
                               {item[keys[0]]}
                             </li>
                           ) : null;
                         })}
                       </ul>
                     </div>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               );
             })}
           </div>

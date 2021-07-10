@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import Header from "./containers/Header";
+import Payment from "./containers/Payment";
 
 import Footer from "./components/Footer";
 
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login setUser={setUser} />
+          </Route>
+          <Route path="/payment">
+            <Payment userToken={userToken} />
           </Route>
           <Route path="/publish">
             <Publish userToken={userToken} />

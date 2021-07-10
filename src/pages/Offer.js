@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 const Offer = () => {
@@ -61,28 +61,28 @@ const Offer = () => {
                 <div className="col-3 mt-1">
                   <img
                     src={data.product_image.secure_url}
-                    alt="Gallery image 1"
+                    alt="Gallery 1"
                     className="active w-100"
                   />
                 </div>
                 <div className="col-3 mt-1">
                   <img
                     src={data.product_image.secure_url}
-                    alt="Gallery image 2"
+                    alt="Gallery 2"
                     className="w-100"
                   />
                 </div>
                 <div className="col-3 mt-1">
                   <img
                     src={data.product_image.secure_url}
-                    alt="Gallery image 3"
+                    alt="Gallery 3"
                     className="w-100"
                   />
                 </div>
                 <div className="col-3 mt-1">
                   <img
                     src={data.product_image.secure_url}
-                    alt="Gallery image 4"
+                    alt="Gallery 4"
                     className="w-100"
                   />
                 </div>
@@ -119,9 +119,11 @@ const Offer = () => {
                   </div>
                   <span>{data.owner.account.username}</span>
                 </div>
-                <button className="btn btn-primary mt-2" type="button">
-                  Acheter
-                </button>
+                <Link to="/payment">
+                  <button className="btn btn-primary mt-2" type="button">
+                    Acheter
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
