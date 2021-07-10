@@ -40,7 +40,7 @@ const Publish = ({ userToken }) => {
     ) {
       try {
         const response = await axios.post(
-          "http://localhost:4000/offer/publish",
+          "https://vinted-frmi-api.herokuapp.com/offer/publish",
           formData,
           { headers: { Authorization: `Bearer ${userToken}` } }
         );
@@ -64,7 +64,7 @@ const Publish = ({ userToken }) => {
           <span>Ajoute jusqu'à 20 photos.</span>
 
           <label htmlFor="file" className="input-design-default">
-            <i class="bi bi-image me-2"></i>
+            <i className="bi bi-image me-2"></i>
             <span>Ajoute une photo</span>
           </label>
 
@@ -166,7 +166,7 @@ const Publish = ({ userToken }) => {
               }}
             />
             <div className="input-group-append">
-              <span class="input-group-text">€</span>
+              <span className="input-group-text">€</span>
             </div>
           </div>
           <div className="d-flex justify-content-center align-items-center">

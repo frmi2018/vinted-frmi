@@ -35,7 +35,7 @@ const Login = ({ setUser }) => {
       // Envoyer au serveur
       try {
         const response = await axios.post(
-          "http://localhost:4000/user/login",
+          "https://vinted-frmi-api.herokuapp.com/user/login",
           data
         );
         // console.log(response.data);
@@ -74,7 +74,7 @@ const Login = ({ setUser }) => {
             onChange={handlePasswordChange}
           />
           <div className="input-group-append">
-            <span class="input-group-text">
+            <span className="input-group-text">
               {visiblePass ? (
                 <i
                   className="bi bi-eye-slash"

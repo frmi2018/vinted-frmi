@@ -12,7 +12,7 @@ const Offer = () => {
       try {
         const response = await axios.get(
           // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
-          `http://localhost:4000/offer/${id}`
+          `https://vinted-frmi-api.herokuapp.com/offer/${id}`
         );
         // console.log(response.data);
         setData(response.data);
