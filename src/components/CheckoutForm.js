@@ -25,12 +25,9 @@ const CheckoutForm = ({ userToken }) => {
       // console.log(stripeResponse);
       // 3 récupérer le token de Stripe et envoi de celui-ci vers notre serveur
       const stripeToken = stripeResponse.token.id;
-      const response = await axios.post(
-        "https://vinted-frmi-api.herokuapp.com/payment",
-        {
-          stripeToken: stripeToken,
-        }
-      );
+      await axios.post("https://vinted-frmi-api.herokuapp.com/payment", {
+        stripeToken: stripeToken,
+      });
       // console.log(response.data);
       setIsLoading(false);
       setTransactionCompleted(true);
