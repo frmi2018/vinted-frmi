@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
-const Offer = () => {
+const Offer = ({ userToken }) => {
   const { id } = useParams();
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +14,7 @@ const Offer = () => {
           // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
           `https://vinted-frmi-api.herokuapp.com/offer/${id}`
         );
-        // console.log(response.data);
+        console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -119,7 +119,12 @@ const Offer = () => {
                   </div>
                   <span>{data.owner.account.username}</span>
                 </div>
-                <Link to="/payment">
+                <Link
+                  to={{
+                    pathname: `/payment/${id}`,
+                    state: { userToken: userToken },
+                  }}
+                >
                   <button className="btn btn-primary mt-2" type="button">
                     Acheter
                   </button>

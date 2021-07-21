@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import FmComponent01 from "./FmComponent01";
 import axios from "axios";
 
-const CheckoutForm = ({ userToken }) => {
+const CheckoutForm = ({ userToken, id }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCompleted, setTransactionCompleted] = useState(false);
   const [completed, setCompleted] = useState(false);
+
+  // charger infos offre
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+          `https://vinted-frmi-api.herokuapp.com/offer/${id}`
+        );
+        // console.log(response.data);
+        setData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    };
+    fetchData();
+  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,24 +64,39 @@ const CheckoutForm = ({ userToken }) => {
     });
   };
 
-  return (
+  return userToken ? (
     <div className="container-fluid p-2 bg-light">
       <div className="card">
         <div className="card-body">
           <span>Résumé de la commande</span>
           <div>
-            <FmComponent01 txt="Commande" number="2.99" />
+            <FmComponent01 txt="Commande" number={data.product_price} />
             <FmComponent01 txt="Frais de protection acheteurs" number="0.30" />
             <FmComponent01 txt="Frais de port" number="0.60" />
           </div>
           <hr />
           <div>
-            <FmComponent01 txt="Total" number="3.89" />
+            <FmComponent01
+              txt="Total"
+              number={parseFloat(data.product_price + 0.9).toFixed(2)}
+            />
           </div>
-          <span>
-            Il ne vous reste plus qu'une étape pour vous offrir NOM. vous allez
-            payer PRIX € (frais de protection et frais de port inclus).
-          </span>
+          <div className="mt-3 text-center">
+            <span>
+              Il ne vous reste plus qu'une étape pour vous offrir{" "}
+              <strong>{data.product_name}</strong>. Vous allez payer{" "}
+              <strong>{parseFloat(data.product_price + 0.9).toFixed(2)}</strong>{" "}
+              € frais de protection et frais de port inclus.
+            </span>
+          </div>
+          <div className="text-danger text-center">
+            <span>
+              ATTENTION SITE FICTIF N'ENTREZ PAS VOTRE NUMERO DE CB, vous pouvez
+              tester en entrant le nombre 42 plusieurs fois pour remplir tous
+              les champs.
+            </span>
+          </div>
+
           <div className="p-4">
             <form onSubmit={handleSubmit}>
               <CardElement onChange={handleChange} />
@@ -105,6 +139,8 @@ const CheckoutForm = ({ userToken }) => {
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to="/login" />
   );
 };
 

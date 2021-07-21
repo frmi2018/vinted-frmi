@@ -34,7 +34,7 @@ function App() {
         <Header userToken={userToken} setUser={setUser} />
         <Switch>
           <Route path="/offer/:id">
-            <Offer />
+            <Offer userToken={userToken} />
           </Route>
           <Route path="/signup">
             <Signup setUser={setUser} />
@@ -42,7 +42,7 @@ function App() {
           <Route path="/login">
             <Login setUser={setUser} />
           </Route>
-          <Route path="/payment">
+          <Route path="/payment/:id">
             <Payment userToken={userToken} />
           </Route>
           <Route path="/publish">

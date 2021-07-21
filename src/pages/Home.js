@@ -7,6 +7,8 @@ const Home = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
+
+  // Charger les annonces
   useEffect(() => {
     const fetchData = async () => {
       try {
