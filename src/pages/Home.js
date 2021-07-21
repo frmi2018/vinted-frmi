@@ -3,17 +3,19 @@ import Banner from "../components/Banner";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = (props) => {
+  const { search } = props;
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(true);
 
   // Charger les annonces
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://vinted-frmi-api.herokuapp.com/offers"
+          `https://vinted-frmi-api.herokuapp.com/offers?title=${search}`
+          // `http://localhost:4000/offers?title=${search}`
         );
         // console.log(response.data);
         setData(response.data);
@@ -23,7 +25,7 @@ const Home = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -48,9 +50,7 @@ const Home = () => {
             </span>
           </div>
 
-          <div
-            className={showAll ? "row row-cols-5" : "d-flex overflow-hidden"}
-          >
+          <div className={showAll ? "row row-cols-5" : "invisible"}>
             {data.offers.map((offer) => {
               return (
                 <Link to={`/offer/${offer._id}`} key={offer._id}>

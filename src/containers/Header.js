@@ -2,7 +2,9 @@ import React from "react";
 import logoVinted from "../assets/images/logo_vinted.png";
 import { Link } from "react-router-dom";
 
-const Header = ({ userToken, setUser }) => {
+const Header = (props) => {
+  const { userToken, setUser, setSearch } = props;
+
   return (
     <header className="container p-2 bg-light border-bottom">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -25,6 +27,16 @@ const Header = ({ userToken, setUser }) => {
               type="search"
               placeholder="Recherche des articles"
               aria-label="Search"
+              onChange={(event) => {
+                if (event.target.value.length > 1) {
+                  event.preventDefault();
+                  setSearch(event.target.value);
+                } else {
+                  if (event.target.value === "") {
+                    setSearch("");
+                  }
+                }
+              }}
             />
           </div>
         </form>

@@ -17,6 +17,7 @@ import Publish from "./pages/Publish";
 
 function App() {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
+  const [search, setSearch] = useState("");
 
   const setUser = (userToken) => {
     if (userToken) {
@@ -31,7 +32,12 @@ function App() {
   return (
     <div className="container">
       <Router>
-        <Header userToken={userToken} setUser={setUser} />
+        <Header
+          userToken={userToken}
+          setUser={setUser}
+          search={search}
+          setSearch={setSearch}
+        />
         <Switch>
           <Route path="/offer/:id">
             <Offer userToken={userToken} />
@@ -49,7 +55,7 @@ function App() {
             <Publish userToken={userToken} />
           </Route>
           <Route path="/">
-            <Home />
+            <Home search={search} />
           </Route>
         </Switch>
         <Footer />
