@@ -12,7 +12,7 @@ const Banner = () => {
       <div className="home-hero-ready d-grid">
         <span className="mb-3">Prêts à faire du tri dans vos placards ?</span>
         <button
-          className="btn btn-primary btn-lg"
+          className="btn btn-primary btn-sm"
           type="button"
           onClick={() => {
             history.push("/publish");

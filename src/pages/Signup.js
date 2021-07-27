@@ -149,19 +149,6 @@ const Signup = ({ setUser }) => {
           </div>
         </div>
 
-        <div className="border border-info mb-2 p-2">
-          <div className="d-flex justify-content-center align-items-center">
-            <input type="checkbox" className="me-2" />
-            <span>S'inscrire à notre newsletter</span>
-          </div>
-
-          <p className="text-justify">
-            En m'inscrivant, je confirme avoir lu et accepté les Termes &amp;
-            Conditions et Politique de Confidentialité de Vinted. Je confirme
-            avoir au moins 18 ans.
-          </p>
-        </div>
-
         <span className="text-danger">{errorMessage}</span>
 
         <div className="text-center">

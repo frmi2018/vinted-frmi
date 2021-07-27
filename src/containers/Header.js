@@ -1,9 +1,41 @@
-import React from "react";
+import "./header.css";
+// dependancies
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Range, getTrackBackground } from "react-range";
+
 import logoVinted from "../assets/images/logo_vinted.png";
-import { Link } from "react-router-dom";
 
 const Header = (props) => {
-  const { userToken, setUser, setSearch } = props;
+  const {
+    userToken,
+    setUser,
+    setSearch,
+    priceMin,
+    setPriceMin,
+    priceMax,
+    setPriceMax,
+    sortFilter,
+    setSortFilter,
+  } = props;
+
+  let location = useLocation();
+
+  const [sortIsActive, setSortIsActive] = useState(false);
+  const [values, setValues] = useState([priceMin, priceMax]);
+
+  //  functions
+
+  const handleSortClick = () => {
+    setSortIsActive(!sortIsActive);
+    if (sortFilter === "price-asc") setSortFilter("price-desc");
+    else setSortFilter("price-asc");
+  };
+
+  const handleChangePrice = () => {
+    setPriceMin(values[0]);
+    setPriceMax(values[1]);
+  };
 
   return (
     <header className="container p-2 bg-light border-bottom">
@@ -14,32 +46,123 @@ const Header = (props) => {
           <img src={logoVinted} alt="logo-vinted" width="100" />
         </Link>
 
-        {/* header center */}
-        <form className="form-inline">
-          <div className="input-group">
-            <div className="input-group-prepend">
-              <span className="input-group-text">
-                <i className="bi bi-search" />
-              </span>
-            </div>
-            <input
-              className="form-control"
-              type="search"
-              placeholder="Recherche des articles"
-              aria-label="Search"
-              onChange={(event) => {
-                if (event.target.value.length > 1) {
-                  event.preventDefault();
-                  setSearch(event.target.value);
-                } else {
-                  if (event.target.value === "") {
-                    setSearch("");
+        {location.pathname === "/" && (
+          <>
+            {/* header center */}
+            <form className="form-inline">
+              {/* search */}
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="bi bi-search" />
+                  </span>
+                </div>
+                <input
+                  className="form-control"
+                  type="search"
+                  placeholder="Recherche des articles"
+                  aria-label="Search"
+                  onChange={(event) => {
+                    if (event.target.value.length > 1) {
+                      event.preventDefault();
+                      setSearch(event.target.value);
+                    } else {
+                      if (event.target.value === "") {
+                        setSearch("");
+                      }
+                    }
+                  }}
+                />
+              </div>
+              {/* filters price*/}
+              <div className="filters-price">
+                <span
+                  style={{
+                    color: "#2baeb7",
+                    fontWeight: "bold",
+                    fontSize: "0.5em",
+                    marginRight: "5px",
+                  }}
+                >
+                  TRI
+                </span>
+                <div
+                  onClick={handleSortClick}
+                  className={
+                    sortIsActive ? `filter-sort isActive` : "filter-sort"
                   }
-                }
-              }}
-            />
-          </div>
-        </form>
+                ></div>
+
+                <Range
+                  step={100}
+                  min={0}
+                  max={50000}
+                  values={values}
+                  onChange={(values) => setValues([...values])}
+                  onFinalChange={handleChangePrice}
+                  renderTrack={({ props, children }) => (
+                    <div
+                      {...props}
+                      style={{
+                        ...props.style,
+                        height: "2px",
+                        width: "50%",
+                        marginRight: "2em",
+                        background: getTrackBackground({
+                          values,
+                          colors: ["#ccc", "#2baeb7", "#ccc"],
+                          min: 0,
+                          max: 50000,
+                        }),
+                      }}
+                    >
+                      {children}
+                    </div>
+                  )}
+                  renderThumb={({ index, props }) => (
+                    // dots
+                    <div
+                      {...props}
+                      style={{
+                        ...props.style,
+                        height: "1em",
+                        width: "1em",
+                        backgroundColor: "#2baeb7",
+                        borderRadius: "50%",
+                        outline: "none",
+                      }}
+                    >
+                      {/* values */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          bottom: "-16px",
+                          color: "#2baeb7",
+                          fontWeight: "bold",
+                          fontSize: "0.7em",
+                        }}
+                      >
+                        {values[index] + "€"}
+                      </div>
+                      {/* label */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "-12px",
+                          color: "#2baeb7",
+                          fontWeight: "bold",
+                          fontSize: "0.5em",
+                        }}
+                      >
+                        {index === 0 ? "MIN" : "MAX"}
+                      </div>
+                    </div>
+                  )}
+                />
+              </div>
+            </form>
+          </>
+        )}
 
         {/* header right */}
         <button

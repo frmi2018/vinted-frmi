@@ -14,7 +14,7 @@ const Offer = ({ userToken }) => {
           // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
           `https://vinted-frmi-api.herokuapp.com/offer/${id}`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {

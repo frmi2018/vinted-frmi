@@ -1,14 +1,14 @@
 import "./App.css";
-
+// dependancies
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Cookies from "js-cookie";
-
+// containers
 import Header from "./containers/Header";
 import Payment from "./containers/Payment";
-
+// components
 import Footer from "./components/Footer";
-
+// pages
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
 import Signup from "./pages/Signup";
@@ -17,11 +17,15 @@ import Publish from "./pages/Publish";
 
 function App() {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
+  // filters
   const [search, setSearch] = useState("");
+  const [priceMin, setPriceMin] = useState(0);
+  const [priceMax, setPriceMax] = useState(50000);
+  const [sortFilter, setSortFilter] = useState("price-asc");
 
   const setUser = (userToken) => {
     if (userToken) {
-      Cookies.set("userToken", userToken, { expires: 7 });
+      Cookies.set("userToken", userToken, { expires: 1 });
       setUserToken(userToken);
     } else {
       Cookies.remove("userToken");
@@ -37,6 +41,12 @@ function App() {
           setUser={setUser}
           search={search}
           setSearch={setSearch}
+          priceMin={priceMin}
+          setPriceMin={setPriceMin}
+          priceMax={priceMax}
+          setPriceMax={setPriceMax}
+          sortFilter={sortFilter}
+          setSortFilter={setSortFilter}
         />
         <Switch>
           <Route path="/offer/:id">
@@ -55,7 +65,12 @@ function App() {
             <Publish userToken={userToken} />
           </Route>
           <Route path="/">
-            <Home search={search} />
+            <Home
+              search={search}
+              priceMin={priceMin}
+              priceMax={priceMax}
+              sortFilter={sortFilter}
+            />
           </Route>
         </Switch>
         <Footer />

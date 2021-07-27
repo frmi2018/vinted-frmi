@@ -1,10 +1,12 @@
+import "./home.css";
+
 import React, { useState, useEffect } from "react";
 import Banner from "../components/Banner";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Home = (props) => {
-  const { search } = props;
+  const { search, priceMin, priceMax, sortFilter } = props;
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [showAll, setShowAll] = useState(true);
@@ -14,8 +16,8 @@ const Home = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://vinted-frmi-api.herokuapp.com/offers?title=${search}`
-          // `http://localhost:4000/offers?title=${search}`
+          // `http://localhost:4000/offers?title=${search}&pricemin=${priceMin}&pricemax=${priceMax}&sort=${sortFilter}`
+          `https://vinted-frmi-api.herokuapp.com/offers?title=${search}&pricemin=${priceMin}&pricemax=${priceMax}&sort=${sortFilter}`
         );
         // console.log(response.data);
         setData(response.data);
@@ -25,7 +27,7 @@ const Home = (props) => {
       }
     };
     fetchData();
-  }, [search]);
+  }, [search, priceMin, priceMax, sortFilter]);
 
   return (
     <>
@@ -36,60 +38,59 @@ const Home = (props) => {
           <span>Chargement des annonces en cours...</span>
         </div>
       ) : (
-        <div className="container">
-          <div className="d-flex justify-content-between align-items-center">
-            <h2>Articles populaires</h2>
-
-            <span
-              className="btn btn-link"
-              onClick={() => {
-                setShowAll(!showAll);
-              }}
-            >
-              {showAll ? "Masquer" : "Afficher tout"}
-            </span>
-          </div>
-
-          <div className={showAll ? "row row-cols-5" : "invisible"}>
-            {data.offers.map((offer) => {
-              return (
-                <Link to={`/offer/${offer._id}`} key={offer._id}>
-                  <div className="card h-100">
-                    <div>
-                      <img
-                        src={offer.product_image.secure_url}
-                        className="card-img-top w-100"
-                        alt={offer.product_name}
-                      />
+        <div className="container p-2 bg-light">
+          <section>
+            <div className="card-offers-container-label">
+              <h2>Articles populaires</h2>
+              <span
+                className="btn btn-link"
+                onClick={() => {
+                  setShowAll(!showAll);
+                }}
+              >
+                {showAll ? "Masquer" : "Afficher tout"}
+              </span>
+            </div>
+            <div className={showAll ? "card-offers-container" : "invisible"}>
+              {data.offers.map((offer) => {
+                return (
+                  <Link to={`/offer/${offer._id}`} key={offer._id}>
+                    <div className="card-offer">
+                      <div className="card-offer-picture-container">
+                        <img
+                          src={offer.product_image.secure_url}
+                          alt={offer.product_name}
+                        />
+                      </div>
+                      <div className="card-offer-description">
+                        <ul className="list-group">
+                          <li className="list-group-item d-flex justify-content-between align-items-center border-0">
+                            <div className="d-flex justify-content-between align-items-center">
+                              <h4>{offer.product_price}€</h4>
+                            </div>
+                            <i className="bi-heart"></i>
+                          </li>
+                          {/* Show only ... */}
+                          {offer.product_details.map((item, index) => {
+                            const keys = Object.keys(item);
+                            return keys[0] === "TAILLE" ||
+                              keys[0] === "MARQUE" ? (
+                              <li
+                                key={index}
+                                className="list-group-item border-0"
+                              >
+                                {item[keys[0]]}
+                              </li>
+                            ) : null;
+                          })}
+                        </ul>
+                      </div>
                     </div>
-                    <div>
-                      <ul className="list-group border-top">
-                        <li className="list-group-item d-flex justify-content-between align-items-center border-0">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <h4>{offer.product_price}€</h4>
-                          </div>
-                          <i className="bi-heart"></i>
-                        </li>
-                        {/* Show only ... */}
-                        {offer.product_details.map((item, index) => {
-                          const keys = Object.keys(item);
-                          return keys[0] === "TAILLE" ||
-                            keys[0] === "MARQUE" ? (
-                            <li
-                              key={index}
-                              className="list-group-item border-0"
-                            >
-                              {item[keys[0]]}
-                            </li>
-                          ) : null;
-                        })}
-                      </ul>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
         </div>
       )}
     </>
