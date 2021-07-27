@@ -23,9 +23,10 @@ I restarted in july to include and learn [BootStrap](https://getbootstrap.com/) 
 
 ## Screens
 
-![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted1.png)
-
-![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted.png)
+![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted-picture-1.jpg?raw=true)
+![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted-picture-2.jpg?raw=true)
+![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted-picture-3.jpg?raw=true)
+![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted-picture-4.jpg?raw=true)
 
 ## Get the Code
 
