@@ -1,0 +1,51 @@
+.left-col {
+  width: 50%;
+}
+
+.active-img img {
+  width: 200px;
+}
+
+.inactive-img {
+  border: 1px solid grey;
+  flex: 1;
+}
+
+.inactive-img img {
+  width: 100%;
+  max-height: 200px;
+  min-height: 100px;
+}
+
+.right-col {
+  width: 50%;
+  margin-left: 4px;
+  border-left: 1px solid grey;
+  padding-left: 4px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*	Media Queries
+/* -------------------------------------------------------------------------- */
+
+/* On screens that are 720px or less */
+
+@media screen and (max-width: 720px) {
+  .left-col {
+    width: 100%;
+  }
+
+  .right-col {
+    width: 100%;
+    margin-left: 0;
+    border-left: 0;
+    padding-left: 0;
+    font-size: 12px;
+  }
+
+  .inactive-img img {
+    width: 100%;
+    max-height: 100px;
+    min-height: 50px;
+  }
+}

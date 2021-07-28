@@ -1,3 +1,5 @@
+import "./offer.css";
+// dependancies
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -41,95 +43,75 @@ const Offer = ({ userToken }) => {
   ) : (
     <div className="container p-2 bg-light">
       <div className="card">
-        <div className="card-body">
-          <div className="row">
-            <div
-              className="col ecommerce-gallery"
-              data-mdb-zoom-effect="true"
-              data-mdb-auto-height="true"
-            >
-              <div className="row shadow-5">
-                <div className="col-12">
-                  <div className="lightbox text-center">
-                    <img
-                      src={data.product_image.secure_url}
-                      alt={data.product_name}
-                      className="ecommerce-gallery-main-img active w-50"
-                    />
-                  </div>
-                </div>
-                <div className="col-3 mt-1">
-                  <img
-                    src={data.product_image.secure_url}
-                    alt="Gallery 1"
-                    className="active w-100"
-                  />
-                </div>
-                <div className="col-3 mt-1">
-                  <img
-                    src={data.product_image.secure_url}
-                    alt="Gallery 2"
-                    className="w-100"
-                  />
-                </div>
-                <div className="col-3 mt-1">
-                  <img
-                    src={data.product_image.secure_url}
-                    alt="Gallery 3"
-                    className="w-100"
-                  />
-                </div>
-                <div className="col-3 mt-1">
-                  <img
-                    src={data.product_image.secure_url}
-                    alt="Gallery 4"
-                    className="w-100"
-                  />
-                </div>
+        <div className="card-body d-md-flex">
+          <div className="left-col d-flex flex-column justify-content-center">
+            <div>
+              <div className="active-img d-flex justify-content-center">
+                <img
+                  src={data.product_image.secure_url}
+                  alt={data.product_name}
+                />
               </div>
             </div>
-            <div className="col">
-              <h1 className="card-title">{data.product_name}</h1>
-              <h2>{data.product_price} €</h2>
-              <p>{data.product_description}</p>
+            {/* Galerie si plus d'une image */}
+            {/* <div className="d-flex justify-content-between mt-2">
+              <div className="inactive-img">
+                <img src={data.product_image.secure_url} alt="Gallery 2" />
+              </div>
+              <div className="inactive-img">
+                <img src={data.product_image.secure_url} alt="Gallery 3" />
+              </div>
+              <div className="inactive-img">
+                <img src={data.product_image.secure_url} alt="Gallery 4" />
+              </div>
+              <div className="inactive-img">
+                <img src={data.product_image.secure_url} alt="Gallery 5" />
+              </div>
+            </div> */}
+          </div>
+          <div className="right-col">
+            <h1 className="card-title">{data.product_name}</h1>
+            <h2>{data.product_price} €</h2>
+            <p className="text-justify">{data.product_description}</p>
 
-              <div className="d-flex flex-column border-top">
-                <table className="table-borderless w-100 my-2">
-                  <tbody>
-                    {data.product_details.map((item, index) => {
-                      const keys = Object.keys(item);
-                      return (
-                        keys[0] !== "MODES DE PAIEMENT" && (
-                          <tr key={index}>
-                            <td>{keys[0]}</td>
-                            <td>{item[keys[0]]}</td>
-                          </tr>
-                        )
-                      );
-                    })}
-                  </tbody>
-                </table>
+            <div className="d-flex flex-column border-top">
+              <table className="table-borderless w-100 my-2">
+                <tbody>
+                  {data.product_details.map((item, index) => {
+                    const keys = Object.keys(item);
+                    return (
+                      keys[0] !== "MODES DE PAIEMENT" && (
+                        <tr key={index}>
+                          <td>{keys[0]}</td>
+                          <td>{item[keys[0]]}</td>
+                        </tr>
+                      )
+                    );
+                  })}
+                </tbody>
+              </table>
 
-                <div className="d-flex align-items-center">
-                  <div
-                    className="avatar m-2"
-                    style={{ backgroundColor: getRandomColor() }}
-                  >
-                    {data.owner.account.username.charAt(0).toUpperCase()}
-                  </div>
-                  <span>{data.owner.account.username}</span>
-                </div>
-                <Link
-                  to={{
-                    pathname: `/payment/${id}`,
-                    state: { userToken: userToken },
-                  }}
+              <div className="d-flex align-items-center">
+                <div
+                  className="avatar m-2"
+                  style={{ backgroundColor: getRandomColor() }}
                 >
+                  {data.owner.account.username.charAt(0).toUpperCase()}
+                </div>
+                <span>{data.owner.account.username}</span>
+              </div>
+              <Link
+                to={{
+                  pathname: `/payment/${id}`,
+                  state: { userToken: userToken },
+                }}
+              >
+                <div className="d-grid gap-2">
                   <button className="btn btn-primary mt-2" type="button">
                     Acheter
                   </button>
-                </Link>
-              </div>
+                </div>
+              </Link>
             </div>
           </div>
         </div>

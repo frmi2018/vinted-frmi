@@ -43,7 +43,6 @@ const Home = (props) => {
             <div className="card-offers-container-label">
               <h2>Articles populaires</h2>
               <span
-                className="btn btn-link"
                 onClick={() => {
                   setShowAll(!showAll);
                 }}
@@ -63,24 +62,20 @@ const Home = (props) => {
                         />
                       </div>
                       <div className="card-offer-description">
-                        <ul className="list-group">
-                          <li className="list-group-item d-flex justify-content-between align-items-center border-0">
-                            <div className="d-flex justify-content-between align-items-center">
+                        <ul>
+                          <li>
+                            <div>
                               <h4>{offer.product_price}€</h4>
+
+                              <i className="bi-heart"></i>
                             </div>
-                            <i className="bi-heart"></i>
                           </li>
                           {/* Show only ... */}
                           {offer.product_details.map((item, index) => {
                             const keys = Object.keys(item);
                             return keys[0] === "TAILLE" ||
                               keys[0] === "MARQUE" ? (
-                              <li
-                                key={index}
-                                className="list-group-item border-0"
-                              >
-                                {item[keys[0]]}
-                              </li>
+                              <li key={index}>{item[keys[0]]}</li>
                             ) : null;
                           })}
                         </ul>
