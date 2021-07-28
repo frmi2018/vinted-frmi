@@ -37,16 +37,16 @@
 /*	Media Queries
 /* -------------------------------------------------------------------------- */
 
-/* On screens that are 768px or less */
+/* On screens that are 974px or less */
 /* 768px (iPad) */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 990px) {
   .home-hero-ready-card {
     padding: 28px !important;
   }
 
   .home-hero-ready-card > span {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 
   .home-hero-ready-card button {
@@ -59,25 +59,47 @@
   }
 }
 
-/* On screens that are 540px or less */
-/* 540px (Surface Duo) */
+/* On screens that are 768px or less */
+/* 768px (iPad) */
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 768px) {
   .home-hero-ready-card {
     padding: 24px !important;
   }
 
   .home-hero-ready-card > span {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+
+  .home-hero-ready-card button {
+    margin: 12px 0;
+    font-size: 0.8rem;
+  }
+
+  .home-hero-ready-card .text-link {
+    font-size: 0.6rem;
+  }
+}
+
+/* On screens that are 540px or less */
+/* 540px (Surface Duo) */
+
+@media screen and (max-width: 540px) {
+  .home-hero-ready-card {
+    padding: 20px !important;
+  }
+
+  .home-hero-ready-card > span {
+    font-size: 0.8rem;
   }
 
   .home-hero-ready-card button {
     margin: 8px 0;
-    font-size: 0.9rem;
+    font-size: 0.6rem;
   }
 
   .home-hero-ready-card .text-link {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 }
 
@@ -85,9 +107,9 @@
 /* 411px (Pixel 2) */
 /* 414px (iPhone 6/7/8 Plus) */
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 426px) {
   .home-hero-ready-card {
-    padding: 16px !important;
+    padding: 12px !important;
   }
 
   .home-hero-ready-card > span {
@@ -96,7 +118,7 @@
 
   .home-hero-ready-card button {
     margin: 4px 0;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
 
   .home-hero-ready-card .text-link {
@@ -109,7 +131,7 @@
 /* 360px (Motor G4/Galaxy S5) */
 /* 320px (iPhone 5/SE) */
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 398px) {
   .home-hero-ready-container {
     width: 50%;
   }

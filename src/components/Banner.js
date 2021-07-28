@@ -24,7 +24,7 @@ const Banner = () => {
           >
             Vends maintenant
           </button>
-          <a href="#">
+          <a href="/">
             <span className="text-link">Découvrir comment ça marche</span>
           </a>
         </div>

@@ -22,10 +22,10 @@
 /*	Media Queries
 /* -------------------------------------------------------------------------- */
 
-/* On screens that are 768px or less */
+/* On screens that are 990px or less */
 /* 768px (iPad) */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 990px) {
   .home-hero-forme {
     height: 30px;
   }
