@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Redirect, Link } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
 
 import FmComponent01 from "./FmComponent01";
 import axios from "axios";
@@ -12,6 +13,10 @@ const CheckoutForm = ({ userToken, id, userInfos }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCompleted, setTransactionCompleted] = useState(false);
   const [completed, setCompleted] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   // function convertCts(num) {
   //   let a = Number((num + 0.9).toFixed(0) * 100);
@@ -104,12 +109,45 @@ const CheckoutForm = ({ userToken, id, userInfos }) => {
               € frais de protection et frais de port inclus.
             </span>
           </div>
-          <div className="text-danger text-center">
-            <span>
-              ATTENTION SITE FICTIF N'ENTREZ PAS VOTRE NUMERO DE CB, vous pouvez
-              tester en entrant le nombre 42 plusieurs fois pour remplir tous
-              les champs.
+
+          <div className="d-flex flex-column justify-content-center align-items-center my-2">
+            <span className="text-danger text-center">
+              --- N'ENTREZ PAS VOTRE NUMERO DE CB ---
+              <br />
+              Pour tester la partie paiement, suivre la démo en video.
+              <br />
+              Merci
+              <br />
             </span>
+            <Button variant="primary" onClick={openModal}>
+              Voir la vidéo
+            </Button>
+
+            <Modal show={isOpen} onHide={closeModal}>
+              <Modal.Header>
+                <Modal.Title>Demo</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="video-section text-center">
+                  <video
+                    style={{ width: "400px", height: "100%" }}
+                    controls
+                    autoPlay
+                  >
+                    <source
+                      src="http://frmi.free.fr/perso/videos/demo.mp4"
+                      type="video/mp4"
+                    ></source>
+                    Sorry, your browser doesn't support videos.
+                  </video>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={closeModal}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </div>
 
           <div className="p-4">

@@ -193,7 +193,7 @@ const Header = (props) => {
           id="navbarNavAltMarkup"
         >
           <ul className="navbar-nav d-flex align-items-center">
-            {userToken ? (
+            {userToken && Object.keys(userInfos).length !== 0 ? (
               <li className="nav-item">
                 <button
                   className="btn btn-outline-danger"
