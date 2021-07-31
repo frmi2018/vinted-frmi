@@ -236,7 +236,7 @@ const Header = (props) => {
               <img
                 style={{ width: "50px", height: "50px", borderRadius: "25px" }}
                 src={userInfos.account.avatar.secure_url}
-                alt="image profil"
+                alt="profil"
               />
             </div>
           ) : (

@@ -99,7 +99,7 @@ const Offer = ({ userToken, userInfos }) => {
                         borderRadius: "25px",
                       }}
                       src={userInfos.account.avatar.secure_url}
-                      alt="image profil"
+                      alt="profil"
                     />
                   </div>
                 ) : (
