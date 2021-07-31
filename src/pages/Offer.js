@@ -89,7 +89,7 @@ const Offer = ({ userToken, userInfos }) => {
                 </tbody>
               </table>
               <div className="d-flex align-items-center">
-                {userInfos.account.avatar !== "" ? (
+                {data.owner.account.avatar !== undefined ? (
                   // affiche image du profil
                   <div className="avatar m-2">
                     <img
@@ -98,7 +98,7 @@ const Offer = ({ userToken, userInfos }) => {
                         height: "50px",
                         borderRadius: "25px",
                       }}
-                      src={userInfos.account.avatar.secure_url}
+                      src={data.owner.account.avatar.secure_url}
                       alt="profil"
                     />
                   </div>
@@ -109,7 +109,7 @@ const Offer = ({ userToken, userInfos }) => {
                       className="avatar m-2"
                       style={{ backgroundColor: getRandomColor() }}
                     >
-                      {userInfos.account.username.charAt(0).toUpperCase()}
+                      {data.owner.account.username.charAt(0).toUpperCase()}
                     </div>
                   </div>
                 )}
