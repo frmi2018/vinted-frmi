@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
-const Offer = ({ userToken }) => {
+const Offer = ({ userToken, userInfos }) => {
   const { id } = useParams();
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -13,10 +13,8 @@ const Offer = ({ userToken }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
           `https://vinted-frmi-api.herokuapp.com/offer/${id}`
         );
-        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -90,20 +88,37 @@ const Offer = ({ userToken }) => {
                   })}
                 </tbody>
               </table>
-
               <div className="d-flex align-items-center">
-                <div
-                  className="avatar m-2"
-                  style={{ backgroundColor: getRandomColor() }}
-                >
-                  {data.owner.account.username.charAt(0).toUpperCase()}
-                </div>
+                {userInfos.account.avatar !== "" ? (
+                  // affiche image du profil
+                  <div className="avatar m-2">
+                    <img
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "25px",
+                      }}
+                      src={userInfos.account.avatar.secure_url}
+                      alt="image profil"
+                    />
+                  </div>
+                ) : (
+                  // affiche première lette
+                  <div className="d-flex align-items-center">
+                    <div
+                      className="avatar m-2"
+                      style={{ backgroundColor: getRandomColor() }}
+                    >
+                      {userInfos.account.username.charAt(0).toUpperCase()}
+                    </div>
+                  </div>
+                )}
                 <span>{data.owner.account.username}</span>
               </div>
               <Link
                 to={{
                   pathname: `/payment/${id}`,
-                  state: { userToken: userToken },
+                  state: { userToken: userToken, userInfos: userInfos },
                 }}
               >
                 <div className="d-grid gap-2">

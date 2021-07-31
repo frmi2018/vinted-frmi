@@ -17,6 +17,8 @@ const Header = (props) => {
     setPriceMax,
     sortFilter,
     setSortFilter,
+    userInfos,
+    setUserInfos,
   } = props;
 
   let location = useLocation();
@@ -37,14 +39,24 @@ const Header = (props) => {
     setPriceMax(values[1]);
   };
 
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   return (
     <header className="container p-2 bg-light border-bottom">
       <nav className="navbar navbar-expand-lg navbar-light">
         {/* header left */}
-
-        <Link to="/" className="navbar-brand nav-link">
-          <img src={logoVinted} alt="logo-vinted" width="100" />
-        </Link>
+        <div className="d-flex">
+          <Link to="/" className="navbar-brand nav-link">
+            <img src={logoVinted} alt="logo-vinted" width="100" />
+          </Link>
+        </div>
 
         {location.pathname === "/" && (
           <>
@@ -188,6 +200,7 @@ const Header = (props) => {
                   type="button"
                   onClick={() => {
                     setUser(null);
+                    setUserInfos({});
                   }}
                 >
                   Se déconnecter
@@ -215,6 +228,28 @@ const Header = (props) => {
             </li>
           </ul>
         </div>
+        {/* afficher profil si userInfos non vide */}
+        {Object.keys(userInfos).length !== 0 &&
+          (userInfos.account.avatar !== "" ? (
+            // affiche image du profil
+            <div className="avatar m-2">
+              <img
+                style={{ width: "50px", height: "50px", borderRadius: "25px" }}
+                src={userInfos.account.avatar.secure_url}
+                alt="image profil"
+              />
+            </div>
+          ) : (
+            // affiche première lette
+            <div className="d-flex align-items-center">
+              <div
+                className="avatar m-2"
+                style={{ backgroundColor: getRandomColor() }}
+              >
+                {userInfos.account.username.charAt(0).toUpperCase()}
+              </div>
+            </div>
+          ))}
       </nav>
     </header>
   );

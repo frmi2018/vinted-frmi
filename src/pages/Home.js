@@ -16,10 +16,8 @@ const Home = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          // `http://localhost:4000/offers?title=${search}&pricemin=${priceMin}&pricemax=${priceMax}&sort=${sortFilter}`
           `https://vinted-frmi-api.herokuapp.com/offers?title=${search}&pricemin=${priceMin}&pricemax=${priceMax}&sort=${sortFilter}`
         );
-        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {

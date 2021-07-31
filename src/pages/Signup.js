@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
-const Signup = ({ setUser }) => {
+const Signup = ({ setUser, userInfos, setUserInfos }) => {
   // state
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [avatar, setAvatar] = useState("");
   // Extras
   const [visiblePass, setVisiblePass] = useState(false);
 
@@ -46,21 +47,33 @@ const Signup = ({ setUser }) => {
         setErrorMessage("minimum 6 caractères pour le password");
       } else {
         // préparer les données
-        const data = {};
-        data.email = email;
-        data.username = username;
-        data.password = password;
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("username", username);
+        formData.append("password", password);
+        formData.append("avatar", avatar);
         // Envoyer au serveur
         try {
           const response = await axios.post(
             "https://vinted-frmi-api.herokuapp.com/user/signup",
-            data
+            formData
           );
           const token = response.data.token;
+          // enregistrer le token
           setUser(token);
+          // sauvegarde des infos utilisateur
+          setUserInfos({
+            account: response.data.account,
+            id: response.data._id,
+          });
+          // informer l'utilisateur que l'inscription est réalisé
+          alert(
+            `Bienvenue ${response.data.account.username}, votre compte a bien été créé.`
+          );
+          // retour page home
           history.push("/");
         } catch (error) {
-          console.log(error.response.data.message);
+          setErrorMessage(error.response.data.message);
         }
       }
     }
@@ -147,6 +160,22 @@ const Signup = ({ setUser }) => {
               )}
             </span>
           </div>
+        </div>
+
+        <div className="form-control mb-2">
+          <label htmlFor="file" className="input-design-default">
+            <i className="bi bi-image me-2"></i>
+            <span>Ajoute une photo de profil</span>
+          </label>
+
+          <input
+            id="file"
+            type="file"
+            className="hide-input-file"
+            onChange={(event) => {
+              setAvatar(event.target.files[0]);
+            }}
+          />
         </div>
 
         <span className="text-danger">{errorMessage}</span>

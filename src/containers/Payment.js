@@ -10,12 +10,12 @@ const stripePromise = loadStripe(
   "pk_test_51IpxOCEJMbc8mz3C6JeqrGGb9kLBr2sqsOQdD62mLKaroQNrQnAHSoiWx5GmcR9cBXL9sF19IsAo5fcjzJvjEvjF00iPHaIQ9v"
 );
 
-const Payment = ({ userToken }) => {
+const Payment = ({ userToken, userInfos }) => {
   const { id } = useParams();
   return (
     <Elements stripe={stripePromise}>
       {/* {Tous les composants dans Elements ont accès à Stripe} */}
-      <CheckoutForm userToken={userToken} id={id} />
+      <CheckoutForm userToken={userToken} id={id} userInfos={userInfos} />
     </Elements>
   );
 };

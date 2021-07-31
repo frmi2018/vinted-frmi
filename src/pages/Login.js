@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
-const Login = ({ setUser }) => {
+const Login = ({ setUser, userInfos, setUserInfos }) => {
   // state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,9 +38,17 @@ const Login = ({ setUser }) => {
           "https://vinted-frmi-api.herokuapp.com/user/login",
           data
         );
-        // console.log(response.data);
         const token = response.data.token;
+        // enregistrer le token
         setUser(token);
+        // informer l'utilisateur qu'il est connecté
+        alert(`Bienvenue ${response.data.account.username}, bonne visite.`);
+        // sauvegarde des infos utilisateur
+        setUserInfos({
+          account: response.data.account,
+          id: response.data._id,
+        });
+        // retour page home
         history.push("/");
       } catch (error) {
         console.log(error.response.data.message);

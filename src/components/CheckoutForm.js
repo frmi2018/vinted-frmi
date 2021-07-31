@@ -5,7 +5,7 @@ import { Redirect, Link } from "react-router-dom";
 import FmComponent01 from "./FmComponent01";
 import axios from "axios";
 
-const CheckoutForm = ({ userToken, id }) => {
+const CheckoutForm = ({ userToken, id, userInfos }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [data, setData] = useState({});
@@ -13,15 +13,19 @@ const CheckoutForm = ({ userToken, id }) => {
   const [transactionCompleted, setTransactionCompleted] = useState(false);
   const [completed, setCompleted] = useState(false);
 
+  // function convertCts(num) {
+  //   let a = Number((num + 0.9).toFixed(0) * 100);
+  //   console.log(a);
+  //   return a;
+  // }
+
   // charger infos offre
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
           `https://vinted-frmi-api.herokuapp.com/offer/${id}`
         );
-        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -39,15 +43,26 @@ const CheckoutForm = ({ userToken, id }) => {
     // 2 validation de la carte bancaire par Stipe (demander la création d'un token)
     try {
       const stripeResponse = await stripe.createToken(cardElement, {
-        name: `Paiement de ${userToken} pour objet Vinted.`,
+        name: `Paiement de ${userInfos.account.username} pour objet ${data.product_name}.`,
       });
-      // console.log(stripeResponse);
       // 3 récupérer le token de Stripe et envoi de celui-ci vers notre serveur
       const stripeToken = stripeResponse.token.id;
-      await axios.post("https://vinted-frmi-api.herokuapp.com/payment", {
+      // Product
+      axios.post("https://vinted-frmi-api.herokuapp.com/payment", {
         stripeToken: stripeToken,
+        userName: userInfos.account.username,
+        userId: userInfos.id,
+        objectName: data.product_name,
       });
-      // console.log(response.data);
+      // Test
+      // await axios.post("http://localhost:4000/payment", {
+      //   stripeToken: stripeToken,
+      //   userName: userInfos.account.username,
+      //   userId: userInfos.id,
+      //   objectName: data.product_name,
+      // TODO
+      // objectPrice: convertCts(data.product_price),
+      // });
       setIsLoading(false);
       setTransactionCompleted(true);
     } catch (error) {

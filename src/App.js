@@ -17,6 +17,8 @@ import Publish from "./pages/Publish";
 
 function App() {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
+  // user infos
+  const [userInfos, setUserInfos] = useState({});
   // filters
   const [search, setSearch] = useState("");
   const [priceMin, setPriceMin] = useState(0);
@@ -30,6 +32,7 @@ function App() {
     } else {
       Cookies.remove("userToken");
       setUserToken(null);
+      setUserInfos({});
     }
   };
 
@@ -47,19 +50,29 @@ function App() {
           setPriceMax={setPriceMax}
           sortFilter={sortFilter}
           setSortFilter={setSortFilter}
+          userInfos={userInfos}
+          setUserInfos={setUserInfos}
         />
         <Switch>
           <Route path="/offer/:id">
-            <Offer userToken={userToken} />
+            <Offer userToken={userToken} userInfos={userInfos} />
           </Route>
           <Route path="/signup">
-            <Signup setUser={setUser} />
+            <Signup
+              setUser={setUser}
+              userInfos={userInfos}
+              setUserInfos={setUserInfos}
+            />
           </Route>
           <Route path="/login">
-            <Login setUser={setUser} />
+            <Login
+              setUser={setUser}
+              userInfos={userInfos}
+              setUserInfos={setUserInfos}
+            />
           </Route>
           <Route path="/payment/:id">
-            <Payment userToken={userToken} />
+            <Payment userToken={userToken} userInfos={userInfos} />
           </Route>
           <Route path="/publish">
             <Publish userToken={userToken} />

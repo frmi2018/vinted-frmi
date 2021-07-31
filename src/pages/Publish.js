@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 
 const Publish = ({ userToken }) => {
@@ -13,6 +13,8 @@ const Publish = ({ userToken }) => {
   const [city, setCity] = useState("");
   const [price, setPrice] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const history = useHistory();
 
   const formData = new FormData();
   formData.append("title", title);
@@ -39,13 +41,16 @@ const Publish = ({ userToken }) => {
       file
     ) {
       try {
-        const response = await axios.post(
+        await axios.post(
           "https://vinted-frmi-api.herokuapp.com/offer/publish",
           formData,
           { headers: { Authorization: `Bearer ${userToken}` } }
         );
-        console.log(response.data);
-        <Redirect to={{ pathname: "/" }} />;
+
+        // informer l'utilisateur que l'inscription est réalisé
+        alert(`Votre annonce à bien été créée.`);
+        // retour page home
+        history.push("/");
       } catch (error) {
         console.log(error.response.data.message);
       }

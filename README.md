@@ -9,7 +9,7 @@ Developed with Visual Studio Code on Windows 10
 
 To carry out a Full-stack project.  
 I started this project during my training at https://www.lereacteur.io/  
-I restarted in july to include and learn [BootStrap](https://getbootstrap.com/) and review the following:
+I restarted in july to add new features and review the following:
 
 - [React](https://fr.reactjs.org/)
 - [MongoDB](https://www.mongodb.com/)
