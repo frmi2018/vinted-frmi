@@ -59,11 +59,7 @@ const Login = ({ setUser, userInfos, setUserInfos }) => {
   // JSX
   return (
     <div className="container p-2 bg-light">
-      <form
-        className="form-control mx-auto"
-        style={{ width: 400 }}
-        onSubmit={handleSubmit}
-      >
+      <form className="form-control mx-auto" onSubmit={handleSubmit}>
         <h2 className="text-center">Se connecter</h2>
         <input
           className="form-control mb-2"

@@ -82,11 +82,7 @@ const Signup = ({ setUser, userInfos, setUserInfos }) => {
   // JSX
   return (
     <div className="container p-2 bg-light">
-      <form
-        className="form-control mx-auto"
-        style={{ width: 400 }}
-        onSubmit={handleSubmit}
-      >
+      <form className="form-control mx-auto" onSubmit={handleSubmit}>
         <h2 className="text-center">S'inscrire</h2>
         <input
           className="form-control mb-2"
@@ -165,7 +161,7 @@ const Signup = ({ setUser, userInfos, setUserInfos }) => {
         <div className="form-control mb-2">
           <label htmlFor="file" className="input-design-default">
             <i className="bi bi-image me-2"></i>
-            <span>Ajoute une photo de profil</span>
+            <span>Ajoute une photo de profil (optionnel)</span>
           </label>
 
           <input

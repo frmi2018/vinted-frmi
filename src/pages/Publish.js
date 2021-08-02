@@ -7,6 +7,7 @@ const Publish = ({ userToken }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [brand, setBrand] = useState("");
+  const [sizeNorm, setSizeNorm] = useState("");
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [condition, setCondition] = useState("");
@@ -15,6 +16,34 @@ const Publish = ({ userToken }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const history = useHistory();
+
+  const sizeNormList = ["Standard", "Euro", "FR", "US"];
+
+  const selectListSize = (sizeNorm) => {
+    if (sizeNorm === "Standard") {
+      return [
+        "2XS",
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL",
+        "5XL",
+        "Unique",
+      ];
+    } else if (sizeNorm === "Euro") {
+      return [32, 34, 36, 38, 40, 42, 44, 46, 48, 50];
+    } else if (sizeNorm === "FR") {
+      return [34, 36, 38, 40, 42, 44, 46, 48, 50, 52];
+    } else if (sizeNorm === "US") {
+      return [42, 44, 46, 48, 50, 52, 54, 56, 58, 60];
+    } else {
+      return [];
+    }
+  };
 
   const formData = new FormData();
   formData.append("title", title);
@@ -66,8 +95,6 @@ const Publish = ({ userToken }) => {
         <h2>Vends ton article</h2>
 
         <div className="form-control mb-2">
-          <span>Ajoute jusqu'à 20 photos.</span>
-
           <label htmlFor="file" className="input-design-default">
             <i className="bi bi-image me-2"></i>
             <span>Ajoute une photo</span>
@@ -117,16 +144,45 @@ const Publish = ({ userToken }) => {
               setBrand(event.target.value);
             }}
           />
-          <span>Taille</span>
-          <input
-            type="text"
-            placeholder="Ex: M"
-            className="form-control mb-2"
-            value={size}
-            onChange={(event) => {
-              setSize(event.target.value);
-            }}
-          />
+          {/* Taile */}
+          <div className="d-flex align-items-center mb-2">
+            <span>Norme</span>
+            {/* Size Norm */}
+            <input
+              list="sizeNorm"
+              className="form-control m-1"
+              value={sizeNorm}
+              onChange={(event) => {
+                setSizeNorm(event.target.value);
+                setSize("");
+              }}
+            />
+            <datalist id="sizeNorm">
+              {sizeNormList.map((elem, index) => (
+                <option key={index} value={elem}>
+                  {elem}
+                </option>
+              ))}
+            </datalist>
+            {/* Items list */}
+            <span>Taille</span>
+            <input
+              list="size"
+              className="form-control m-1"
+              value={size}
+              onChange={(event) => {
+                setSize(event.target.value);
+              }}
+            />
+            <datalist id="size">
+              {selectListSize(sizeNorm).map((elem, index) => (
+                <option key={index} value={elem}>
+                  {elem}
+                </option>
+              ))}
+            </datalist>
+          </div>{" "}
+          {/* end Taille */}
           <span>Couleur</span>
           <input
             type="text"
