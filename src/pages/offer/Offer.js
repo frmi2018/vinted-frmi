@@ -3,6 +3,9 @@ import "./offer.css";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+// components
+import AvatarLetter from "../../components/Avatars/AvatarLetter/AvatarLetter";
+import AvatarPicture from "../../components/Avatars/AvatarPicture/AvatarPicture";
 
 const Offer = ({ userToken, userInfos }) => {
   const { id } = useParams();
@@ -23,15 +26,6 @@ const Offer = ({ userToken, userInfos }) => {
     };
     fetchData();
   }, [id]);
-
-  function getRandomColor() {
-    var letters = "0123456789ABCDEF";
-    var color = "#";
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
 
   return isLoading ? (
     <div className="d-flex justify-content-center align-items-center ">
@@ -90,28 +84,9 @@ const Offer = ({ userToken, userInfos }) => {
               </table>
               <div className="d-flex align-items-center">
                 {data.owner.account.avatar !== undefined ? (
-                  // affiche image du profil
-                  <div className="avatar m-2">
-                    <img
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "25px",
-                      }}
-                      src={data.owner.account.avatar.secure_url}
-                      alt="profil"
-                    />
-                  </div>
+                  <AvatarPicture userInfos={data.owner} />
                 ) : (
-                  // affiche première lette
-                  <div className="d-flex align-items-center">
-                    <div
-                      className="avatar m-2"
-                      style={{ backgroundColor: getRandomColor() }}
-                    >
-                      {data.owner.account.username.charAt(0).toUpperCase()}
-                    </div>
-                  </div>
+                  <AvatarLetter userInfos={data.owner} />
                 )}
                 <span>{data.owner.account.username}</span>
               </div>

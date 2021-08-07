@@ -1,0 +1,19 @@
+.card-offer {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 0.4em;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.card-offer-picture-container {
+  width: 100%;
+  height: 60%;
+}
+
+.card-offer-description {
+  width: 100%;
+  height: 40%;
+  color: black;
+}

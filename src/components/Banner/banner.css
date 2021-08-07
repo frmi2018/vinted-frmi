@@ -1,0 +1,46 @@
+.hero-block {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 65vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.hero-block-background {
+  max-height: 100%;
+  position: relative;
+}
+
+.hero-block-background > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.hero-block-background .tear {
+  position: absolute;
+  left: 25%;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-image: url(./assets/images/tear.svg);
+  background-position: bottom -1px right -1px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.hero-block .ready-block {
+  position: absolute;
+  width: 100%;
+  height: 15vh;
+  left: 0px;
+}
+
+@media only screen and (min-width: 721px) {
+  .hero-block .ready-block {
+    width: 50%;
+    bottom: 4rem;
+    left: 16px;
+  }
+}

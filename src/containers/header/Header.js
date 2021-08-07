@@ -1,10 +1,12 @@
 import "./header.css";
+import logoVinted from "./assets/images/logo_vinted.png";
 // dependancies
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Range, getTrackBackground } from "react-range";
-
-import logoVinted from "../assets/images/logo_vinted.png";
+// components
+import AvatarLetter from "../../components/Avatars/AvatarLetter/AvatarLetter";
+import AvatarPicture from "../../components/Avatars/AvatarPicture/AvatarPicture";
 
 const Header = (props) => {
   const {
@@ -38,15 +40,6 @@ const Header = (props) => {
     setPriceMin(values[0]);
     setPriceMax(values[1]);
   };
-
-  function getRandomColor() {
-    var letters = "0123456789ABCDEF";
-    var color = "#";
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
 
   return (
     <header className="container p-2 bg-light border-bottom">
@@ -231,24 +224,13 @@ const Header = (props) => {
         {/* afficher profil si userInfos non vide */}
         {Object.keys(userInfos).length !== 0 &&
           (userInfos.account.avatar !== "" ? (
-            // affiche image du profil
-            <div className="avatar m-2">
-              <img
-                style={{ width: "50px", height: "50px", borderRadius: "25px" }}
-                src={userInfos.account.avatar.secure_url}
-                alt="profil"
-              />
-            </div>
+            <Link to={`/member/${userInfos.id}`} className="mx-2">
+              <AvatarPicture userInfos={userInfos} />
+            </Link>
           ) : (
-            // affiche première lette
-            <div className="d-flex align-items-center">
-              <div
-                className="avatar m-2"
-                style={{ backgroundColor: getRandomColor() }}
-              >
-                {userInfos.account.username.charAt(0).toUpperCase()}
-              </div>
-            </div>
+            <Link to={`/member/${userInfos.id}`} className="mx-2">
+              <AvatarLetter userInfos={userInfos} />
+            </Link>
           ))}
       </nav>
     </header>

@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useParams } from "react-router-dom";
 
-import CheckoutForm from "../components/CheckoutForm";
+import CheckoutForm from "../components/CheckoutForm/CheckoutForm";
 
 // Stripe Public key
 const stripePromise = loadStripe(

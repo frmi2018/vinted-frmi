@@ -1,28 +1,31 @@
+// ***********************************************************************************************
+// La partie paiement fonctionne mais n'est pas disponible en ligne pour éviter tout problème
+// Il faut décommenter les lignes : 8, 17-19, 23, 55, 58-60, 62-71, 80-85, 178-184 pour l'utiliser
+// ***********************************************************************************************
+import "../CheckoutForm/checkoutForm.css";
+
 import React, { useState, useEffect } from "react";
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import { CardElement } from "@stripe/react-stripe-js";
+// import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { Redirect, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 
 import FmComponent01 from "./FmComponent01";
 import axios from "axios";
 
-const CheckoutForm = ({ userToken, id, userInfos }) => {
-  const stripe = useStripe();
-  const elements = useElements();
+const CheckoutForm = (props) => {
+  const { userToken, id } = props;
+  // const {userInfos} = props;
+  // const stripe = useStripe();
+  // const elements = useElements();
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCompleted, setTransactionCompleted] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  // const [completed, setCompleted] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
-
-  // function convertCts(num) {
-  //   let a = Number((num + 0.9).toFixed(0) * 100);
-  //   console.log(a);
-  //   return a;
-  // }
 
   // charger infos offre
   useEffect(() => {
@@ -44,29 +47,22 @@ const CheckoutForm = ({ userToken, id, userInfos }) => {
     event.preventDefault();
     setIsLoading(true);
     // 1 récupérer les données bancaires rentrées par l'utilisateur
-    const cardElement = elements.getElement(CardElement);
+    // const cardElement = elements.getElement(CardElement);
     // 2 validation de la carte bancaire par Stipe (demander la création d'un token)
     try {
-      const stripeResponse = await stripe.createToken(cardElement, {
-        name: `Paiement de ${userInfos.account.username} pour objet ${data.product_name}.`,
-      });
+      // const stripeResponse = await stripe.createToken(cardElement, {
+      //   name: `Paiement de ${userInfos.account.username} pour objet ${data.product_name}.`,
+      // });
       // 3 récupérer le token de Stripe et envoi de celui-ci vers notre serveur
-      const stripeToken = stripeResponse.token.id;
+      // const stripeToken = stripeResponse.token.id;
       // Product
-      axios.post("https://vinted-frmi-api.herokuapp.com/payment", {
-        stripeToken: stripeToken,
-        userName: userInfos.account.username,
-        userId: userInfos.id,
-        objectName: data.product_name,
-      });
-      // Test
-      // await axios.post("http://localhost:4000/payment", {
+      // axios.post("https://vinted-frmi-api.herokuapp.com/payment", {
       //   stripeToken: stripeToken,
       //   userName: userInfos.account.username,
       //   userId: userInfos.id,
       //   objectName: data.product_name,
-      // TODO
-      // objectPrice: convertCts(data.product_price),
+      //   // TODO: Envoyer le prix de objet en centimes
+      //   // objectPrice: data.product_price,
       // });
       setIsLoading(false);
       setTransactionCompleted(true);
@@ -76,12 +72,12 @@ const CheckoutForm = ({ userToken, id, userInfos }) => {
   };
 
   const handleChange = () => {
-    setCompleted(false);
-    elements.getElement(CardElement).on("change", (event) => {
-      if (event.complete) {
-        setCompleted(true);
-      }
-    });
+    // setCompleted(false);
+    // elements.getElement(CardElement).on("change", (event) => {
+    //   if (event.complete) {
+    //     setCompleted(true);
+    //   }
+    // });
   };
 
   return userToken ? (
@@ -112,14 +108,12 @@ const CheckoutForm = ({ userToken, id, userInfos }) => {
 
           <div className="d-flex flex-column justify-content-center align-items-center my-2">
             <span className="text-danger text-center">
-              --- N'ENTREZ PAS VOTRE NUMERO DE CB ---
+              ATTENTION SITE FICTIF N'ENTREZ PAS VOTRE NUMERO DE CB
               <br />
-              Pour tester la partie paiement, suivre la démo en video.
-              <br />
-              Merci
-              <br />
+              Pour éviter tout problème la partie paiement n'est pas utilisable
+              mais uniquement visible en vidéo.
             </span>
-            <Button variant="primary" onClick={openModal}>
+            <Button variant="primary" onClick={openModal} className="m-2">
               Voir la vidéo
             </Button>
 
@@ -128,12 +122,8 @@ const CheckoutForm = ({ userToken, id, userInfos }) => {
                 <Modal.Title>Demo</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <div className="video-section text-center">
-                  <video
-                    style={{ width: "400px", height: "100%" }}
-                    controls
-                    autoPlay
-                  >
+                <div>
+                  <video controls autoPlay style={{ width: "100%" }}>
                     <source
                       src="http://frmi.free.fr/perso/videos/demo.mp4"
                       type="video/mp4"
@@ -178,13 +168,13 @@ const CheckoutForm = ({ userToken, id, userInfos }) => {
                 </div>
               ) : (
                 <div className="row p-2">
-                  <button
+                  {/* <button
                     className="btn btn-primary mt-2"
                     type="submit"
                     disabled={!completed}
                   >
                     Payer
-                  </button>
+                  </button> */}
                 </div>
               )}
             </form>
