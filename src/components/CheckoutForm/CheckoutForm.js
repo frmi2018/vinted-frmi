@@ -125,10 +125,16 @@ const CheckoutForm = (props) => {
                 <div>
                   <video controls autoPlay style={{ width: "100%" }}>
                     <source
-                      src="http://frmi.free.fr/perso/videos/demo.webm"
+                      src="http://portfolio.michaudfranck.ovh/assets/videos/demo.webm"
                       type="video/webm"
                     ></source>
-                    Sorry, your browser doesn't support videos.
+                    <p>
+                      Sorry, your browser doesn't support videos but you can{" "}
+                      <a href="http://portfolio.michaudfranck.ovh/assets/videos/demo.webm">
+                        download (1.74Mo)
+                      </a>{" "}
+                      it.
+                    </p>
                   </video>
                 </div>
               </Modal.Body>
