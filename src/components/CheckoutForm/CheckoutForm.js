@@ -125,8 +125,8 @@ const CheckoutForm = (props) => {
                 <div>
                   <video controls autoPlay style={{ width: "100%" }}>
                     <source
-                      src="http://frmi.free.fr/perso/videos/demo.mp4"
-                      type="video/mp4"
+                      src="http://frmi.free.fr/perso/videos/demo.webm"
+                      type="video/webm"
                     ></source>
                     Sorry, your browser doesn't support videos.
                   </video>
