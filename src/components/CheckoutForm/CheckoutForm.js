@@ -3,15 +3,18 @@
 // Il faut décommenter les lignes : 8, 17-19, 23, 55, 58-60, 62-71, 80-85, 178-184 pour l'utiliser
 // ***********************************************************************************************
 import "../CheckoutForm/checkoutForm.css";
+import videomp4 from "../../assets/videos/demo.mp4";
+import videowebm from "../../assets/videos/demo.webm";
 
+// Dependancies
 import React, { useState, useEffect } from "react";
 import { CardElement } from "@stripe/react-stripe-js";
 // import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { Redirect, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
-
-import FmComponent01 from "./FmComponent01";
 import axios from "axios";
+// Components
+import FmComponent01 from "./FmComponent01";
 
 const CheckoutForm = (props) => {
   const { userToken, id } = props;
@@ -124,14 +127,8 @@ const CheckoutForm = (props) => {
               <Modal.Body>
                 <div>
                   <video controls style={{ width: "100%", height: "auto" }}>
-                    <source
-                      src="http://portfolio.michaudfranck.ovh/assets/videos/demo.mp4"
-                      type="video/mp4"
-                    />
-                    <source
-                      src="http://portfolio.michaudfranck.ovh/assets/videos/demo.webm"
-                      type="video/webm"
-                    />
+                    <source src={videomp4} type="video/mp4" />
+                    <source src={videowebm} type="video/webm" />
                     Sorry, your browser doesn't support the video tag but you
                     can{" "}
                     <a href="http://portfolio.michaudfranck.ovh/assets/videos/demo.mp4">
