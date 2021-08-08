@@ -1,7 +1,7 @@
 .hero-block {
   box-sizing: border-box;
   height: 100%;
-  min-height: 65vh;
+  min-height: 50vh;
   padding-top: 20px;
   padding-bottom: 20px;
   position: relative;
