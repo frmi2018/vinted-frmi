@@ -11,7 +11,7 @@ const Member = ({ userToken, userInfos }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("Messages");
+  // const [errorMessage, setErrorMessage] = useState("Messages");
   // Extras
   const [visiblePass, setVisiblePass] = useState(false);
 
@@ -172,7 +172,7 @@ const Member = ({ userToken, userInfos }) => {
         </tr>
         <tr>
           <td colSpan="4" className="text-center">
-            <span className="text-danger">{errorMessage}</span>
+            <span className="text-danger"></span>
           </td>
         </tr>
       </tbody>
