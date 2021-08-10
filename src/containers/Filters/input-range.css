@@ -1,0 +1,30 @@
+.range-track {
+  min-width: 60%;
+  height: 2px;
+  margin-right: 2em;
+}
+
+.range-dot {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  outline: none;
+  background-color: #2baeb7;
+}
+
+.range-value,
+.range-label {
+  position: absolute;
+  font-weight: bold;
+  color: #2baeb7;
+  font-size: 0.7em;
+}
+
+.range-value,
+.range-label {
+  bottom: -16px;
+}
+
+.range-label {
+  bottom: 16px;
+}

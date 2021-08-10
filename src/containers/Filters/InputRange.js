@@ -1,3 +1,5 @@
+import "./input-range.css";
+
 import React, { useState } from "react";
 import { Range, getTrackBackground } from "react-range";
 
@@ -25,11 +27,9 @@ export const InputRange = ({
       renderTrack={({ props, children }) => (
         <div
           {...props}
+          className="range-track"
           style={{
             ...props.style,
-            height: "2px",
-            width: "15%",
-            marginRight: "2em",
             background: getTrackBackground({
               values,
               colors: ["#ccc", "#2baeb7", "#ccc"],
@@ -43,41 +43,11 @@ export const InputRange = ({
       )}
       renderThumb={({ index, props }) => (
         // dots
-        <div
-          {...props}
-          style={{
-            ...props.style,
-            height: "1em",
-            width: "1em",
-            backgroundColor: "#2baeb7",
-            borderRadius: "50%",
-            outline: "none",
-          }}
-        >
+        <div {...props} className="range-dot">
           {/* values */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: "-16px",
-              color: "#2baeb7",
-              fontWeight: "bold",
-              fontSize: "0.7em",
-            }}
-          >
-            {values[index] + "€"}
-          </div>
+          <div className="range-value">{values[index] + "€"}</div>
           {/* label */}
-          <div
-            style={{
-              position: "absolute",
-              top: "-12px",
-              color: "#2baeb7",
-              fontWeight: "bold",
-              fontSize: "0.5em",
-            }}
-          >
-            {index === 0 ? "MIN" : "MAX"}
-          </div>
+          <div className="range-label">{index === 0 ? "MIN" : "MAX"}</div>
         </div>
       )}
     />

@@ -1,3 +1,4 @@
+import "./sort-price.css";
 import React, { useState } from "react";
 
 export const SortPrice = ({ sortFilter, setSortFilter }) => {
@@ -8,17 +9,8 @@ export const SortPrice = ({ sortFilter, setSortFilter }) => {
     else setSortFilter("price-asc");
   };
   return (
-    <div className="d-flex flex-column align-items-center">
-      <span
-        style={{
-          color: "#2baeb7",
-          fontWeight: "bold",
-          fontSize: "0.5em",
-          marginRight: "5px",
-        }}
-      >
-        TRI
-      </span>
+    <div className="sort-price-container">
+      <span>TRI</span>
       <div
         onClick={handleSortClick}
         className={sortIsActive ? `filter-sort isActive` : "filter-sort"}

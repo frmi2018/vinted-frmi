@@ -4,8 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 // components
-import AvatarLetter from "../../components/Avatars/AvatarLetter/AvatarLetter";
-import AvatarPicture from "../../components/Avatars/AvatarPicture/AvatarPicture";
+import Avatars from "../../components/Avatars/Avatars";
 
 const Offer = ({ userToken, userInfos }) => {
   const { id } = useParams();
@@ -82,14 +81,7 @@ const Offer = ({ userToken, userInfos }) => {
                   })}
                 </tbody>
               </table>
-              <div className="d-flex align-items-center">
-                {data.owner.account.avatar !== undefined ? (
-                  <AvatarPicture userInfos={data.owner} />
-                ) : (
-                  <AvatarLetter userInfos={data.owner} />
-                )}
-                <span>{data.owner.account.username}</span>
-              </div>
+              <Avatars userInfos={data.owner} />
               <Link
                 to={{
                   pathname: `/payment/${id}`,

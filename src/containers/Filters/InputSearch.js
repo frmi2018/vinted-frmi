@@ -1,8 +1,10 @@
+import "./input-search.css";
+
 import React from "react";
 
 export const InputSearch = ({ setSearch }) => {
   return (
-    <div className="input-group" style={{ width: "55%" }}>
+    <div className="input-container">
       <div className="input-group-prepend">
         <span className="input-group-text">
           <i className="bi bi-search" />
