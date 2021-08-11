@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
-const Signup = ({ setUser, userInfos, setUserInfos }) => {
+const Signup = ({ setUser, setUserInfos }) => {
   // state
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");

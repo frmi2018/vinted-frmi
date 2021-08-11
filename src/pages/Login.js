@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
-const Login = ({ setUser, userInfos, setUserInfos }) => {
+const Login = ({ setUser, setUserInfos }) => {
   // state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,10 +14,12 @@ const Login = ({ setUser, userInfos, setUserInfos }) => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    setErrorMessage(null);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    setErrorMessage(null);
   };
 
   const handleSubmit = async (e) => {
@@ -51,6 +53,7 @@ const Login = ({ setUser, userInfos, setUserInfos }) => {
         // retour page home
         history.push("/");
       } catch (error) {
+        setErrorMessage(error.response.data.message);
         console.log(error.response.data.message);
       }
     }

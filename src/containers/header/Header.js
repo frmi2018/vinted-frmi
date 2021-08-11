@@ -1,7 +1,7 @@
 import logoVinted from "./assets/images/logo_vinted.png";
 // dependancies
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 
 // components
 import Avatars from "../../components/Avatars/Avatars";
@@ -19,10 +19,10 @@ const Header = (props) => {
     sortFilter,
     setSortFilter,
     userInfos,
-    setUserInfos,
   } = props;
 
   let location = useLocation();
+  const history = useHistory();
 
   return (
     <header className="container p-2 bg-light border-bottom">
@@ -38,13 +38,15 @@ const Header = (props) => {
         {/* buttons */}
 
         <div className="d-flex align-items-center flex-nowrap ms-auto">
-          {userToken && Object.keys(userInfos).length !== 0 ? (
+          {Object.keys(userInfos).length !== 0 ? (
             <button
               className="btn btn-outline-danger"
               type="button"
               onClick={() => {
+                // Effacer token
                 setUser(null);
-                setUserInfos({});
+                // retour page home
+                history.push("/");
               }}
             >
               Se déconnecter
@@ -63,19 +65,33 @@ const Header = (props) => {
         </div>
 
         <div>
-          <Link to="/publish" className="nav-link">
+          <Link
+            to={{
+              pathname: "/publish",
+              state: { userToken: userToken },
+            }}
+            className="nav-link"
+          >
             <button className="btn btn-primary" type="button">
               Vends maintenant
             </button>
           </Link>
         </div>
-
-        <div className="bg-primary">
-          {/* Avatar */}
-          {Object.keys(userInfos).length !== 0 && (
-            <Avatars userInfos={userInfos} />
-          )}
-        </div>
+        {Object.keys(userInfos).length !== 0
+          ? location.pathname !== `/member/${userInfos.id}` && (
+              <div>
+                <Link
+                  to={{
+                    pathname: `/member/${userInfos.id}`,
+                    state: { userInfos: userInfos, userToken: userToken },
+                  }}
+                >
+                  {/* Avatar */}
+                  <Avatars userInfos={userInfos} />
+                </Link>
+              </div>
+            )
+          : null}
       </nav>
       {location.pathname === "/" && (
         <Filters

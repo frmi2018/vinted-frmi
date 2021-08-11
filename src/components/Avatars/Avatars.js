@@ -12,7 +12,6 @@ const Avatars = ({ userInfos }) => {
       ) : (
         <AvatarLetter userInfos={userInfos} />
       )}
-      <span>{userInfos.account.username}</span>
     </div>
   );
 };
