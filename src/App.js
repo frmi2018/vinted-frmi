@@ -17,7 +17,7 @@ import Offer from "./pages/offer/Offer";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Publish from "./pages/Publish";
-import Member from "./pages/Member";
+import Member from "./pages/Member/Member";
 
 function App() {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
