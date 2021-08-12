@@ -25,7 +25,6 @@ const Member = ({ userToken, userInfos }) => {
           `https://vinted-frmi-api.herokuapp.com/user/?id=${id}`
         );
         setData(response.data);
-        console.log(data);
         setIsLoading(false);
       } catch (error) {
         console.log(error.response.data.message);
