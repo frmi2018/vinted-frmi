@@ -1,11 +1,11 @@
 # Vinted
 
 📅 started july 2021  
-Developed with Visual Studio Code on Windows 10
+🚧 in progress...
 
-🔨 in progress...
+🌐 see online at https://vinted-frmi.netlify.app/
 
-## Why that ?
+## Why ?
 
 To carry out a Full-stack project.  
 I started this project during my training at https://www.lereacteur.io/  
@@ -28,12 +28,6 @@ I restarted in july to add new features and review the following:
 ![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted-picture-3.jpg?raw=true)
 ![alt text](https://github.com/frmi2018/vinted-frmi/blob/main/vinted-picture-4.jpg?raw=true)
 
-## Get the Code
-
-```
-$ git clone https://github.com/frmi2018/vinted-frmi.git
-```
-
 ## Backend
 
-https://github.com/frmi2018/API-vinted
+https://github.com/frmi2018/react/tree/main/back/vinted
